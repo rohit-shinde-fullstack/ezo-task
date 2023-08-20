@@ -16,12 +16,16 @@
   color: #2C9E0B;
   text-align: center;
   padding: 20px;
+background-color: #bee7b1;
+margin-bottom: 10px;
 }
 
 .withdraw-fail {
   color: #C11212;
   text-align: center;
   padding: 20px;
+  background-color: #cfc1c1;
+  margin-bottom: 10px;
 }
 
 .page-header {
@@ -46,4 +50,16 @@
 .atm-overview {
   padding: 50px 0;
   text-align: center;
+}
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.demo-section + .demo-section {
+  margin-top: 16px;
+}
+section{
+  margin-left: 30%;
 }

@@ -1,20 +1,20 @@
-  <cdk-virtual-scroll-viewport #scroller itemSize="72" class="content">
+<cdk-virtual-scroll-viewport #scroller itemSize="72" class="content">
   <mat-list class="content">
     <mat-list-item *ngFor="let item of responseData">
       <img matListAvatar [src]="item.url" />
-      <h3 matLine>{{item.itemName}}</h3>
+      <h3 matLine>{{ item.itemName }}</h3>
       <p matLine>
-        <span> {{item.itemPrice}} </span>
+        <span> {{ item.itemPrice }} </span>
       </p>
       <p matLine>
-        <span> {{item.itemBarcode}} </span>
+        <span> {{ item.itemBarcode }} </span>
       </p>
       <button mat-icon-button [matMenuTriggerFor]="itemMenu">
         <mat-icon> more_vert </mat-icon>
       </button>
       <mat-divider></mat-divider>
     </mat-list-item>
-    <div class="spinner-item">
+    <div class="spinner-item" *ngIf="loading">
       <mat-progress-spinner [mode]="'indeterminate'" [diameter]="50">
       </mat-progress-spinner>
     </div>

@@ -3,7 +3,4 @@ export enum CurrencyValue {
     'thousands',
     'fiveHundred',
     'hundred',
-    'twenty',
-    'ten',
-    'rupees'
 }

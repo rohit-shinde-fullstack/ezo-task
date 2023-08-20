@@ -16,9 +16,6 @@ export class AtmstateService {
       { value: CurrencyValue[CurrencyValue.thousands], display: 1000, amount: 0 },
       { value: CurrencyValue[CurrencyValue.fiveHundred], display: 500, amount: 0 },
       { value: CurrencyValue[CurrencyValue.hundred], display: 100, amount:0 },
-      { value: CurrencyValue[CurrencyValue.twenty], display: 20, amount: 0 },
-      { value: CurrencyValue[CurrencyValue.ten], display: 10, amount: 0 },
-      { value: CurrencyValue[CurrencyValue.rupees], display: 1, amount: 1 }
     ];
     this._behaviorSubject.next(this._currentStock);
   }
@@ -63,22 +60,18 @@ export class AtmstateService {
     // }
     // amount -= fivesUsed * 5;
 
-    var dolalrsUsed = Math.floor(amount / 1);
-    if(dolalrsUsed > this._currentStock[5].amount) {
-      dolalrsUsed = this._currentStock[5].amount;
-    }
-    amount -= dolalrsUsed * 1;
-
     if(amount === 0) {
       this._currentStock[0].amount -= twoThoudandsUsed;
       this._currentStock[1].amount -= thousandsUsed;
       this._currentStock[2].amount -= fiveHundred;
       this._currentStock[3].amount -= hundred;
-      this._currentStock[5].amount -= dolalrsUsed;
-
       return true;
     }
 
     return false;
+  }
+
+  multiplyAmount(){
+
   }
 }

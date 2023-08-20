@@ -3,7 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { ShopingListComponent } from './shoping-list/shoping-list.component';
 
 const ROUTES: Routes = [
-  {path:'',component:ShopingListComponent}
+  {path:'',component:ShopingListComponent},
+  {
+    path:'',
+    redirectTo:'/shopping-list',
+    pathMatch:'full'
+  }
+
 ];
 
 @NgModule({

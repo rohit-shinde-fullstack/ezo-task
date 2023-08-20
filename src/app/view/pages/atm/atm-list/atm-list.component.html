@@ -1,70 +1,173 @@
-<form [formGroup]="restockForm" (submit)="restock()" class="atm-restock">
-  <h3 class="page-header">Restock the ATM</h3>
-  <div class='restock-success' *ngIf='restockSuccessFull'>Congradulations Restock Successful! {{date}}</div>
-  <h5 class="page-header">Restock with:</h5>
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">2000</span>
-      </div>
-      <div class="input-group-prepend" *ngFor="let stock of atmStateService.getCurrentStock() | async">
-        <span class="input-group-text" *ngIf="stock.display == 2000">{{stock.amount}}</span>
-      </div>
-      <input type="number" formControlName='twoThousands' class="form-control" aria-label="Hundreads">
-  </div>
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">1000</span>
-      </div>
-      <div class="input-group-prepend" *ngFor="let stock of atmStateService.getCurrentStock() | async">
-        <span class="input-group-text" *ngIf="stock.display == 1000">{{stock.amount}}</span>
-      </div>
-      <input type="number" formControlName='thousands' class="form-control" aria-label="Fifties">
-  </div>
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">500</span>
-      </div>
-      <div class="input-group-prepend" *ngFor="let stock of atmStateService.getCurrentStock() | async">
-        <span class="input-group-text" *ngIf="stock.display == 500">{{stock.amount}}</span>
-      </div>
-      <input type="number" formControlName='fiveHundred' class="form-control" aria-label="Twenties">
-  </div>
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">100</span>
-      </div>
-      <div class="input-group-prepend" *ngFor="let stock of atmStateService.getCurrentStock() | async">
-        <span class="input-group-text" *ngIf="stock.display == 100">{{stock.amount}}</span>
-      </div>
-      <input type="number" formControlName='hundred' class="form-control" aria-label="Tens">
-  </div>
+<section>
+  <form [formGroup]="restockForm" (submit)="restock()" class="atm-restock">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Restock the ATM</mat-card-title>
+        <mat-card-subtitle>
+          <div class="restock-success" *ngIf="restockSuccessFull">
+            Congradulations Restock Successful! {{ date }}
+          </div></mat-card-subtitle
+        >
+      </mat-card-header>
 
-  <div class="row">
-      <div class="col text-center">
-          <button class="btn btn-primary" type="submit">Process</button>
-      </div>
-  </div>
-</form>
+      <mat-card-content>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">2000</span>
+          </div>
+          <div
+            class="input-group-prepend"
+            *ngFor="let stock of atmStateService.getCurrentStock() | async"
+          >
+            <span class="input-group-text" *ngIf="stock.display == 2000">{{
+              stock.amount
+            }}</span>
+          </div>
+          <input
+            type="number"
+            formControlName="twoThousands"
+            placeholder="Please Enter Amount"
+            class="form-control"
+            aria-label="Hundreads"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">1000</span>
+          </div>
+          <div
+            class="input-group-prepend"
+            *ngFor="let stock of atmStateService.getCurrentStock() | async"
+          >
+            <span class="input-group-text" *ngIf="stock.display == 1000">{{
+              stock.amount
+            }}</span>
+          </div>
+          <input
+            type="number"
+            formControlName="thousands"
+            placeholder="Please Enter Amount"
+            class="form-control"
+            aria-label="Fifties"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">500</span>
+          </div>
+          <div
+            class="input-group-prepend"
+            *ngFor="let stock of atmStateService.getCurrentStock() | async"
+          >
+            <span class="input-group-text" *ngIf="stock.display == 500">{{
+              stock.amount
+            }}</span>
+          </div>
+          <input
+            type="number"
+            formControlName="fiveHundred"
+            placeholder="Please Enter Amount"
+            class="form-control"
+            aria-label="Twenties"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">100</span>
+          </div>
+          <div
+            class="input-group-prepend"
+            *ngFor="let stock of atmStateService.getCurrentStock() | async"
+          >
+            <span class="input-group-text" *ngIf="stock.display == 100">{{
+              stock.amount
+            }}</span>
+          </div>
+          <input
+            type="number"
+            formControlName="hundred"
+            placeholder="Please Enter Amount"
+            class="form-control"
+            aria-label="Tens"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Total Amount</span>
+          </div>
+          <div class="input-group-prepend">
+            <span class="input-group-text">{{ totalAmount }}</span>
+          </div>
+          <!-- <input type="number" formControlName='hundred' placeholder="Please Enter Amount" class="form-control" aria-label="Tens"> -->
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="btn btn-success" type="submit">Deposit</button>
+      </mat-card-actions>
+    </mat-card>
+    <h3 class="page-header"></h3>
 
-<form [formGroup]="withdrawForm" (submit)="processWithdrawl()" class="atm-withdraw">
-  <h3 class='page-header'>Withdraw from the ATM</h3>
-  <!-- <div class='withdraw-fail' *ngIf='withdrawlSuccessFull !== null && !withdrawlSuccessFull'>Cannot WithDraw {{date}}</div> -->
+    <h5 class="page-header">Restock with:</h5>
+  </form>
 
-  <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Repees</span>
-      </div>
-      <input type="number" formControlName='withdrawlAmount' class="form-control" aria-label="Amount (to the nearest dollar)">
-      <div class="input-group-append">
-        <span class="input-group-text">.00</span>
-      </div>
-  </div>
-  <div class="row">
-      <div class="col text-center">
-          <button class="btn btn-primary" type="submit">Withdraw</button>
-      </div>
-  </div>
-  <div *ngFor="let item of transactionHistory">
-    <div [class]="item.isSuccess?'withdraw-success':'withdraw-fail'">{{item.message}}</div>
-  </div>
-</form>
+  <form
+    [formGroup]="withdrawForm"
+    (submit)="processWithdrawl()"
+    class="atm-withdraw"
+  >
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Withdraw from the ATM</mat-card-title>
+        <mat-card-subtitle>Repees</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Repees</span>
+          </div>
+          <input
+            type="number"
+            formControlName="withdrawlAmount"
+            class="form-control"
+            placeholder="please enter withdraw amout"
+            aria-label="Amount (to the nearest dollar)"
+          />
+          <div class="input-group-append">
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="btn btn-primary" type="submit">Withdraw</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title
+          [matBadge]="transactionHistory.length"
+          matBadgeOverlap="false"
+          class="demo-section"
+          >Log</mat-card-title
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row" style="margin-bottom: 20px">
+          <div *ngFor="let item of transactionHistory">
+            <div
+              [class]="
+                item.isSuccess
+                  ? 'withdraw-success'
+                  : 'withdraw-fail'
+              "
+            >
+              {{ item.message }}
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <!-- <div class='withdraw-fail' *ngIf='withdrawlSuccessFull !== null && !withdrawlSuccessFull'>Cannot WithDraw {{date}}</div> -->
+  </form>
+</section>
