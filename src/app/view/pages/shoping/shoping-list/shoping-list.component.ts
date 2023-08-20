@@ -1,6 +1,6 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { filter, map, pairwise, throttleTime } from 'rxjs';
+import { AfterViewInit, ChangeDetectionStrategy, Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subject, filter, map, pairwise, takeUntil, throttleTime, timer } from 'rxjs';
 import { ShoppingService } from 'src/app/core/services/shopping.service';
 
 @Component({
@@ -10,14 +10,16 @@ import { ShoppingService } from 'src/app/core/services/shopping.service';
   providers:[],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShopingListComponent implements OnInit, AfterViewInit {
+export class ShopingListComponent implements OnInit, AfterViewInit,OnDestroy{
   @ViewChild('scroller') scroller: CdkVirtualScrollViewport;
   responseData: any[] = [];
+  private destroy$ = new Subject();
   emptyArray = [];
   shoppinglistData
   rohit = 'rohit'
   items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
   itemSize = 80;
+  loading:boolean = false;
   constructor(
     private shoppingService:ShoppingService,
     private ngZone :NgZone
@@ -25,12 +27,10 @@ export class ShopingListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getShopingListData();
-    console.log('after',this.emptyArray.forEach(res =>{
-      console.log(res )
-    }))
+    this.loading = true;
   }
   getShopingListData(){
-    this.shoppingService.getShoppingList().subscribe( (response: any) => {
+    this.shoppingService.getShoppingList().pipe(takeUntil(this.destroy$)).subscribe( (response: any) => {
       this.responseData = response.items;
       console.log(this.responseData)
        // Assign the API response to the variable
@@ -51,5 +51,9 @@ ngAfterViewInit(): void {
     });
   })
 
+}
+ngOnDestroy(): void {
+  this.destroy$.next(null);  // trigger the unsubscribe
+  this.destroy$.complete(); // finalize & clean up the subject stream
 }
 }

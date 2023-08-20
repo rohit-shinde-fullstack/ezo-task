@@ -2,13 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AtmRoutingModule } from './atm-routing.module';
+import { AtmListComponent } from './atm-list/atm-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AtmListComponent
+  ],
   imports: [
     CommonModule,
-    AtmRoutingModule
+    AtmRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AtmModule { }
