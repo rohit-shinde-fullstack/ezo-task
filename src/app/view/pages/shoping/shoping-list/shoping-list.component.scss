@@ -1,0 +1,30 @@
+// @media (min-width: 1025px) {
+//   .h-custom {
+//   height: 100vh !important;
+//   }
+//   }
+
+  .example-viewport {
+    height: 100%;
+  min-height: 100%;
+  width: 100%;
+  min-width: 100%;
+  }
+
+//   .example-item-detail {
+
+//   }
+
+//   .example-alternate {
+//     background: rgba(127, 127, 127, 0.3);
+//   }
+.content {
+  height: calc(100vh - 64px);
+  overflow: auto;
+}
+
+.spinner-item {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+}
